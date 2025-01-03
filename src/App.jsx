@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 function App() {
 
   const messages = [
@@ -6,7 +8,16 @@ function App() {
     "Invest your new income 🤑",
   ];
 
-  const step = 1;
+  const [step, setStep] = useState(1);
+  const [maxStep,] = useState(messages.length);
+
+  const handlePrev = () => {
+    step > 1 && setStep(step - 1)
+  };
+
+  const handleNext = () => {
+    step < maxStep && setStep(step + 1)
+  };
 
   return (
     <div className="steps">
@@ -25,8 +36,18 @@ function App() {
         Step: {step}: {messages[step - 1]}
       </p>
       <div className="buttons">
-        <button className="bg-sky-900 text-zinc-100">Previous</button>
-        <button className="bg-sky-900 text-zinc-100">Next</button>
+        <button
+          className="bg-sky-900 text-zinc-100"
+          onClick={handlePrev}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-sky-900 text-zinc-100"
+          onClick={handleNext}
+        >
+          Next
+        </button>
       </div>
     </div>
   )
